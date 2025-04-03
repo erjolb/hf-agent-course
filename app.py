@@ -9,14 +9,23 @@ from Gradio_UI import GradioUI
 
 # Below is an example of a tool that does nothing. Amaze us with your creativity !
 @tool
-def my_custom_tool(arg1:str, arg2:int)-> str: #it's import to specify the return type
+def get_asn_holder(asn:str)-> str: #it's import to specify the return type
     #Keep this format for the description / args / args description but feel free to modify the tool
-    """A tool that does nothing yet 
+    """A tool that gets my ip via ifconfig.me
     Args:
-        arg1: the first argument
-        arg2: the second argument
+        asn: A string representing the ASN.
     """
-    return "What magic will you build ?"
+    try:
+        # Make a Get request to the RIPE API
+        response = requests.get(f"https://stat.ripe.net/data/as-overview/data.json?resource={asn}")
+        if response.status_code == 200:
+            data = response.json()
+            # Extract the ASN information
+            holder = data['data']
+            # Return the ASN information
+            return f"ASN Information: {holder['holder']}"
+    except requests.exceptions.RequestException as e:
+        return f"Error fetching ASN information: {e}"
 
 @tool
 def get_current_time_in_timezone(timezone: str) -> str:
