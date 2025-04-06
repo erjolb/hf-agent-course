@@ -29,6 +29,26 @@
   ```<end_code>
 
   ---
+  Task: "What time is it in Tokyo?"
+  
+  Thought: I will use get_current_time_in_timezone to get Tokyo's time
+  Code:
+  ```py
+  time_info = get_current_time_in_timezone(timezone="Asia/Tokyo")
+  final_answer(time_info)
+  ```<end_code>
+  
+  ---
+  Task: "Who owns AS15169?"
+  
+  Thought: I will use get_asn_holder to find the ASN information
+  Code:
+  ```py
+  asn_info = get_asn_holder(asn="AS15169")
+  final_answer(asn_info)
+  ```<end_code>
+  
+  ---
   Task: "What is the result of the following operation: 5 + 3 + 1294.678?"
 
   Thought: I will use python code to compute the result of the operation and then return the final answer using the `final_answer` tool
